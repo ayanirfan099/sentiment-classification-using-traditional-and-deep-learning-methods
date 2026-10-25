@@ -16,7 +16,7 @@ from sklearn.svm import LinearSVC
 CHECKPOINT = "distilbert/distilbert-base-uncased-finetuned-sst-2-english"
 
 
-def validate(frame):
+def validate(frame: pd.DataFrame) -> pd.DataFrame:
     if not {"text", "label", "split"} <= set(frame):
         raise ValueError("Required columns: text,label,split")
     if frame.empty or frame.text.isna().any() or frame.text.astype(str).str.strip().eq("").any():
@@ -36,7 +36,7 @@ def validate(frame):
     return frame
 
 
-def measure(y, pred):
+def measure(y, pred) -> dict:
     precision, recall, f1, _ = precision_recall_fscore_support(
         y, pred, average="macro", zero_division=0
     )
@@ -66,7 +66,7 @@ class TransformerSentiment:
         # Explicit SST-2 convention; arbitrary checkpoints must document matching labels.
         self.checkpoint = str(checkpoint)
 
-    def predict(self, texts, batch_size=16):
+    def predict(self, texts: list[str], batch_size: int = 16) -> np.ndarray:
         import torch
 
         if not texts or any(not isinstance(t, str) or not t.strip() for t in texts):
