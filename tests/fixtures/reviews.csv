@@ -1,0 +1,33 @@
+text,label,split
+A wonderful film with moving performances,1,train
+Excellent acting and a thoughtful story,1,train
+Beautiful images and compelling characters,1,train
+A delightful comedy with warm humor,1,train
+The story is engaging and the cast brilliant,1,train
+Wonderful direction makes this worth watching,1,train
+An excellent movie full of clever dialogue,1,train
+A touching film with a satisfying ending,1,train
+I loved the pacing and the great music,1,train
+A brilliant performance in a beautiful drama,1,train
+This clever comedy was enjoyable throughout,1,train
+The film offers a moving and original story,1,train
+A terrible film with wooden performances,0,train
+Awful acting and a dull story,0,train
+Ugly images and unconvincing characters,0,train
+A tedious comedy without any humor,0,train
+The story is boring and the cast dreadful,0,train
+Terrible direction makes this hard to watch,0,train
+An awful movie full of clumsy dialogue,0,train
+A pointless film with a disappointing ending,0,train
+I hated the pacing and the irritating music,0,train
+A dreadful performance in a boring drama,0,train
+This tiresome comedy was painful throughout,0,train
+The film offers a dull and predictable story,0,train
+I found this film wonderful and enjoyable,1,test
+The acting was excellent and touching,1,test
+A great story with beautiful music,1,test
+Not boring at all but surprisingly delightful,1,test
+I found this film terrible and dull,0,test
+The acting was awful and irritating,0,test
+A boring story with clumsy music,0,test
+Not excellent despite a brilliant opening,0,test

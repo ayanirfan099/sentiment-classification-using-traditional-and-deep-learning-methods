@@ -1,0 +1,6 @@
+seed = 42
+validation_fraction = 0.25
+C = [0.1, 1.0, 10.0]
+max_features = 50000
+transformer_max_tokens = 512
+pretrained_checkpoint = "distilbert/distilbert-base-uncased-finetuned-sst-2-english"

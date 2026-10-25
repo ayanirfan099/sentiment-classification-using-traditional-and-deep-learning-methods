@@ -1,0 +1,3 @@
+# Methodology
+
+Preserve the official Stanford IMDb train/test directories when preparing CSV. Hold out 25% of official training reviews for C selection by macro-F1. Fit TF-IDF only on the training partition for model selection; refit chosen classical pipelines on all official train data, never official test. Default transformer checkpoint is distilbert/distilbert-base-uncased-finetuned-sst-2-english, pretrained/fine-tuned upstream on SST-2, not trained within this project. Truncate at 512 tokens and disclose loss of long-review context. Report document lengths, length groups, error positions, serialized classical sizes, model load/inference timing and transformer parameter bytes when executed.
