@@ -1,4 +1,4 @@
-# Sentiment classification: classical models and transformer inference
+# Sentiment Classification — Classical Models & DistilBERT Pipeline
 
 A tested comparison pipeline for majority baseline, TF-IDF logistic regression, TF-IDF linear SVM and explicitly pretrained DistilBERT inference. Models are shown in the demo only when their artifacts or inference path are available.
 
