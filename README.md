@@ -2,23 +2,20 @@
 
 A tested comparison pipeline for majority baseline, TF-IDF logistic regression, TF-IDF linear SVM and explicitly pretrained DistilBERT inference. Models are shown in the demo only when their artifacts or inference path are available.
 
-## Research question and methodology
-Preserve the official Stanford IMDb train/test directories when preparing CSV. Hold out 25% of official training reviews for C selection by macro-F1. Fit TF-IDF only on the training partition for model selection; refit chosen classical pipelines on all official train data, never official test. Default transformer checkpoint is distilbert/distilbert-base-uncased-finetuned-sst-2-english, pretrained/fine-tuned upstream on SST-2, not trained within this project. Truncate at 512 tokens and disclose loss of long-review context. Report document lengths, length groups, error positions, serialized classical sizes, model load/inference timing and transformer parameter bytes when executed.
+[![CI](https://github.com/ayanirfan099/sentiment-classification-using-traditional-and-deep-learning-methods/actions/workflows/ci.yml/badge.svg)](https://github.com/ayanirfan099/sentiment-classification-using-traditional-and-deep-learning-methods/actions/workflows/ci.yml) ![Python 3.12 CI](https://img.shields.io/badge/Python-3.12_CI-3776AB) [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-```mermaid
-flowchart LR
-    A[Validated data] --> B[Reproducible preprocessing]
-    B --> C[Models and baselines]
-    C --> D[Held-out evaluation]
-    D --> E[Metrics and analysis]
-```
+![Classical sentiment comparison on the 32-review software fixture, not IMDb](results/fixture/comparison.png)
+
 
 ## Executed results
 Executed the offline 32-review software fixture, including negation in test inputs. Fixture macro-F1: majority=0.3333, logistic=0.7500, svm=0.7500. These values are software checks, **not IMDb results**. Real dataset/pretrained comparisons and nuanced error analyses remain pending. [Measured fixture JSON](results/fixture/metrics.json).
 
-![Fixture comparison](results/fixture/comparison.png)
 
 ## Reproduce
+![Recorded fixture inference latency and SVM confusion matrix](results/fixture/diagnostics.png)
+
+These are the committed eight-review test-fixture measurements, not IMDb or pretrained DistilBERT performance. Recreate this visualization with `python scripts/plot_fixture_diagnostics.py`; timings describe the original run and should not be compared across hardware.
+
 From this repository root:
 ```bash
 python -m pip install -e '.[dev]'
@@ -31,6 +28,20 @@ streamlit run src/sentiment_study/app.py
 pytest -q
 ruff check .
 ruff format --check .
+```
+
+## Research question and methodology
+Preserve the official Stanford IMDb train/test directories when preparing CSV. Hold out 25% of official training reviews for C selection by macro-F1. Fit TF-IDF only on the training partition for model selection; refit chosen classical pipelines on all official train data, never official test. Default transformer checkpoint is distilbert/distilbert-base-uncased-finetuned-sst-2-english, pretrained/fine-tuned upstream on SST-2, not trained within this project. Truncate at 512 tokens and disclose loss of long-review context. Report document lengths, length groups, error positions, serialized classical sizes, model load/inference timing and transformer parameter bytes when executed.
+
+```mermaid
+flowchart LR
+    Data[Official IMDb train / test boundaries] --> Train[Train-only validation split]
+    Train --> TFIDF[Train-fitted TF-IDF]
+    TFIDF --> Select[Validation selects logistic / SVM C]
+    Select --> Refit[Refit on official training reviews]
+    Refit --> Test[Held-out metrics and error analysis]
+    Data --> Pretrained[Separate pretrained DistilBERT inference path]
+    Pretrained --> Test
 ```
 
 ## Implementation and review
